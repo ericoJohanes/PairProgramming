@@ -1,0 +1,42 @@
+[
+    {
+        "categoryName": "challenge",
+        "subject": "Bahasa"
+    },
+    {
+        "categoryName": "local",
+        "subject": "IPA"
+    },
+    {
+        "categoryName": "portal",
+        "subject": "Keterampilan"
+    },
+    {
+        "categoryName": "contingency",
+        "subject": "IPS"
+    },
+    {
+        "categoryName": "superstructure",
+        "subject": "IPA"
+    },
+    {
+        "categoryName": "Profit-focused",
+        "subject": "Bahasa"
+    },
+    {
+        "categoryName": "heuristic",
+        "subject": "Keterampilan"
+    },
+    {
+        "categoryName": "pricing structure",
+        "subject": "Bahasa"
+    },
+    {
+        "categoryName": "initiative",
+        "subject": "Keterampilan"
+    },
+    {
+        "categoryName": "forecast",
+        "subject": "Keterampilan"
+    }
+]
