@@ -1,0 +1,30 @@
+{
+  "name": "pairproject_team8",
+  "version": "1.0.0",
+  "description": "pair project by -Erico, -Jendy",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericoJohanes/PairProgramming.git"
+  },
+  "keywords": [
+    "Education"
+  ],
+  "author": "Team8",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericoJohanes/PairProgramming/issues"
+  },
+  "homepage": "https://github.com/ericoJohanes/PairProgramming#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "pg": "^8.9.0",
+    "sequelize": "^6.28.0"
+  }
+}
