@@ -10,7 +10,7 @@ class Controller {
     }
     static loginForm(req, res) {
         let { error } = req.query
-        error = error || {}
+        error = error || null
 
         res.render('loginForm', { error })
     }
@@ -69,7 +69,8 @@ class Controller {
     }
     static userDetailForm(req, res) {
         let UserId = req.session.userId;
-        let { error } = req.query;
+        let { error } = req.query
+        error = error || null
 
         UserDetail.findOne({ where: { UserId } })
             .then(userDetail => {
@@ -110,6 +111,9 @@ class Controller {
     static courseDetail(req, res) {
         let { id } = req.params;
         let course;
+        let { error } = req.query
+        error = error || null
+
 
         Course.findByPk(+id, {
             include: { model: User }
@@ -119,7 +123,7 @@ class Controller {
                 return User.findByPk(course.TeacherId, { include: UserDetail })
             })
             .then(teacher => {
-                res.render('courseDetail', { teacher, course, hourFormatter })
+                res.render('courseDetail', { teacher, course, hourFormatter, error })
             })
             .catch(err => {
                 res.send(err)
@@ -172,14 +176,42 @@ class Controller {
     }
     static userDetail(req, res) {
         let { id } = req.params;
+        let { error } = req.query;
+        error = error || null
 
         UserDetail.findOne({
             where: { UserId: +id }
         })
             .then(user => {
-                res.render('userDetail', { user })
+                res.render('userDetail', { user, error })
             })
             .catch(err => res.send(err))
+    }
+    static editForm(req, res) {
+        let id = req.session.userId
+        let { error } = req.query;
+        error = error || null
+
+        UserDetail.findOne({
+            where: { UserId: id }
+        })
+            .then(userDetail => {
+                userDetail.dateOfBirth = UserDetail.dateConvert(userDetail.dateOfBirth)
+                console.log(userDetail.dateOfBirth);
+                res.render('editForm', { userDetail, error })
+            })
+
+    }
+    static editDetail(req, res) {
+        let { fullName, profilePicture, school, dateOfBirth, about } = req.body;
+        let { id } = req.params;
+
+        UserDetail.update({ fullName, profilePicture, school, dateOfBirth, about }, { where: { UserId: +id } })
+            .then(_ => res.redirect(`/user/${id}/details`))
+            .catch(err => {
+                let errors = errorHandler(err)
+                errors ? res.redirect(`/user/${id}/edit?error=${errors}`) : res.send(err)
+            })
     }
     static logout(req, res) {
         req.session.destroy()

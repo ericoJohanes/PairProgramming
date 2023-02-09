@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
 
-    static hashingPass() {
+    hashingPass() {
       let salt = bcryptjs.genSaltSync(7);
       let passHashed = bcryptjs.hashSync(this.password, salt)
       return passHashed
@@ -31,24 +31,24 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
-        notEmpty: true,
-        notNull: true,
+        notEmpty: { msg: 'email cannot be empty' },
+        notNull: { msg: 'email cannot be null' }
       }
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true,
-        notNull: true,
+        notEmpty: { msg: 'password cannot be empty' },
+        notNull: { msg: 'password cannot be null' }
       }
     },
     role: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true,
-        notNull: true,
+        notEmpty: { msg: 'role cannot be empty' },
+        notNull: { msg: 'role cannot be null' }
       }
     }
   }, {

@@ -11,6 +11,11 @@
 
 <body>
     <%-include ('partials/_loggedNavbar') %>
+        <div class="errors">
+            <% if (error) { %>
+                <%-include ('partials/_errors') %>
+                    <% } %>
+        </div>
         <h1>
             <%= course.name %>
         </h1>
