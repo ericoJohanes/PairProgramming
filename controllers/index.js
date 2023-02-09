@@ -1,4 +1,3 @@
-const { User, Course, Category, UserDetail } = require('../models')
 
 class Controller {
     static homepage(req, res) {
