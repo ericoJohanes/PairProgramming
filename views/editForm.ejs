@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../input.css">
+    <title>Edit Form</title>
+</head>
+
+<body>
+    <%-include ('partials/_navbar') %>
+        <div class="errors">
+            <% if (error) { %>
+                <%-include ('partials/_errors') %>
+                    <% } %>
+        </div>
+        <div class="formContainer">
+            <form action="/user/<%= userDetail.UserId %>/edit" method="post">
+                <label for="">Full Name</label>
+                <input type="text" name="fullName" value="<%= userDetail.fullName %>">
+                <br>
+                <label for="">Profile Picture</label>
+                <input type="url" name="profilePicture" value="<%= userDetail.profilePicture %>">
+                <br>
+                <label for="">School Name</label>
+                <input type="text" name="school" value="<%= userDetail.school %>">
+                <br>
+                <label for="">Birth Date</label>
+                <input type="date" name="dateOfBirth" value="<%=  userDetail.dateOfBirth %>">
+                <br>
+                <label for="">About</label>
+                <input type="text" name="about" value="<%= userDetail.about %>">
+                <br>
+                <button type="submit">submit</button>
+            </form>
+        </div>
+</body>
+
+</html>

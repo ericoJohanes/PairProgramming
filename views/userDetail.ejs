@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../input.css">
+  <title>User</title>
+</head>
+
+<body>
+  <%-include ('partials/_loggedNavbar') %>
+    <div class="errors">
+      <% if (error) { %>
+        <%-include ('partials/_errors') %>
+          <% } %>
+    </div>
+    <h1>User Details</h1>
+    <table>
+      <tbody>
+        <div style="display: flex; flex-wrap: wrap;">
+          <div style="width: 25%; display: inline-block;">
+            <td>
+              <div class="profilePicture">
+                <img src="<%= user.profilePicture %>" alt="Profile Picture">
+              </div>
+              <p><b>Full Name:</b>
+                <%= user.fullName %>
+              </p>
+              <p><b>School:</b>
+                <%= user.school %>
+              </p>
+              <p><b>Date of Birth:</b>
+                <%= user.dateOfBirth %>
+              </p>
+              <p><b>About:</b>
+                <%= user.about %>
+              </p>
+              <button type="button" id="edit"
+                onclick="window.location.href='/user/<%= user.UserId %>/edit'">Edit</button>
+            </td>
+          </div>
+        </div>
+      </tbody>
+
+    </table>
+</body>
+
+</html>

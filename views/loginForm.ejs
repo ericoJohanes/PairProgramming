@@ -1,20 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - Education Hub</title>
+    <link rel="stylesheet" type="text/css" href="../input.css">
 </head>
 
 <body>
-    <h1>Login Form</h1>
-    <form action="/login" method="post">
-        <input type="text" name="email" placeholder="email">
-        <input type="password" name="password" placeholder="password">
-        <button type="submit">Login</button>
-    </form>
+    <%-include ('partials/_navbar') %>
+        <div class="errors">
+            <% if (error) { %>
+                <%-include ('partials/_errors') %>
+                    <% } %>
+        </div>
+        <div class="container">
+
+            <h2>Login</h2>
+            <form action="/login" method="post">
+                <label for="Email">Email:</label>
+                <input type="text" id="Email" name="email" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button class="btn" type="submit">Submit</button>
+
+            </form>
+        </div>
+        <div class="registerLink">
+            <a href="/register">
+                doesn't have an account? register now!
+            </a>
+        </div>
 </body>
 
 </html>

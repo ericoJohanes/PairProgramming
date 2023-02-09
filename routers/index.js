@@ -5,24 +5,26 @@ const router = require('express').Router()
 router.get('/', Controller.home)
 router.get('/login', Controller.loginForm)
 router.post('/login', Controller.login)
+router.get('/logout', Controller.logout)
 router.get('/register', Controller.registerForm)
 router.post('/register', Controller.register)
 
 //for login to see course
+router.use(Controller.auth)
 
-
+router.get('/registerDetail', Controller.userDetailForm)
+router.post('/registerDetail', Controller.addUserDetail)
 router.get('/courses', Controller.courses)
-
-//for students to enroll
-
-router.get('/courses/enroll/:id', Controller.enrollForm)
-router.post('/courses/enroll/:id', Controller.enrollCourse)
-
-//for teacher to create course
-
+router.get('/courses/add', Controller.auth)
 router.get('/courses/add', Controller.addForm)
 router.post('/courses/add', Controller.addCourse)
-router.get('/courses/:id/details', Controller.userDetail)
+router.get('/courses/:id/courseDetail', Controller.courseDetail)
+router.get('/courses/:id/delete', Controller.deleteCourse)
+router.get('/courses/:CourseId/enroll/', Controller.enrollCourse)
+router.get('/user/:id/details', Controller.userDetail)
+router.get('/user/:id/details', Controller.userDetail)
+router.get('/user/:id/edit', Controller.editForm)
+router.post('/user/:id/edit', Controller.editDetail)
 
 
 module.exports = router

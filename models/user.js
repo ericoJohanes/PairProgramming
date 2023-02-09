@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-
       User.hasOne(models.UserDetail)
       User.belongsToMany(models.Course, { through: models.StudentCourse, foreignKey: 'StudentId' })
 
@@ -29,15 +28,28 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: { msg: 'email cannot be empty' },
+        notNull: { msg: 'email cannot be null' }
+      }
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: { msg: 'password cannot be empty' },
+        notNull: { msg: 'password cannot be null' }
+      }
     },
     role: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: { msg: 'role cannot be empty' },
+        notNull: { msg: 'role cannot be null' }
+      }
     }
   }, {
     sequelize,
@@ -45,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.beforeCreate((user, opt) => {
-    user.password = user.hashingPass()
+    user.password = User.hashingPass()
   })
 
   return User;

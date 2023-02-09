@@ -11,24 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      StudentCourse.belongsTo(models.User)
-      StudentCourse.belongsTo(models.Course)
     }
   }
   StudentCourse.init({
     StudentId: {
       type: DataTypes.INTEGER,
-      references: {
-        model: 'Users',
-        key: 'id'
-      }
     },
     CourseId: {
       type: DataTypes.INTEGER,
-      references: {
-        model: 'Courses',
-        key: 'id'
-      }
     }
   }, {
     sequelize,
