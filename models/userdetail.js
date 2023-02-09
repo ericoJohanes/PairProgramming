@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     dateOfBirth: DataTypes.DATE,
     about: DataTypes.STRING,
     UserId: {
+      allowNull: false,
       type: DataTypes.INTEGER,
       references: {
         model: 'User',

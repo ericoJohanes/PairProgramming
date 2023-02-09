@@ -18,7 +18,6 @@ module.exports = {
         }
       },
       CourseId: {
-        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: { tableName: 'Courses' },

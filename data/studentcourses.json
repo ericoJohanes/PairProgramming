@@ -1,20 +1,82 @@
-[{"StudentId":3,"CourseId":"Hard"},
-{"StudentId":7,"CourseId":"Easy"},
-{"StudentId":5,"CourseId":"Medium"},
-{"StudentId":5,"CourseId":"Easy"},
-{"StudentId":1,"CourseId":"Easy"},
-{"StudentId":7,"CourseId":"Medium"},
-{"StudentId":7,"CourseId":"Medium"},
-{"StudentId":5,"CourseId":"Medium"},
-{"StudentId":1,"CourseId":"Hard"},
-{"StudentId":10,"CourseId":"Hard"},
-{"StudentId":10,"CourseId":"Medium"},
-{"StudentId":5,"CourseId":"Easy"},
-{"StudentId":7,"CourseId":"Easy"},
-{"StudentId":1,"CourseId":"Medium"},
-{"StudentId":5,"CourseId":"Easy"},
-{"StudentId":3,"CourseId":"Hard"},
-{"StudentId":1,"CourseId":"Hard"},
-{"StudentId":1,"CourseId":"Hard"},
-{"StudentId":4,"CourseId":"Easy"},
-{"StudentId":1,"CourseId":"Hard"}]
+[
+    {
+        "StudentId": 5,
+        "CourseId": 4
+    },
+    {
+        "StudentId": 5,
+        "CourseId": 18
+    },
+    {
+        "StudentId": 10,
+        "CourseId": 10
+    },
+    {
+        "StudentId": 10,
+        "CourseId": 15
+    },
+    {
+        "StudentId": 10,
+        "CourseId": 18
+    },
+    {
+        "StudentId": 10,
+        "CourseId": 15
+    },
+    {
+        "StudentId": 5,
+        "CourseId": 9
+    },
+    {
+        "StudentId": 1,
+        "CourseId": 14
+    },
+    {
+        "StudentId": 5,
+        "CourseId": 5
+    },
+    {
+        "StudentId": 4,
+        "CourseId": 17
+    },
+    {
+        "StudentId": 4,
+        "CourseId": 2
+    },
+    {
+        "StudentId": 7,
+        "CourseId": 15
+    },
+    {
+        "StudentId": 7,
+        "CourseId": 1
+    },
+    {
+        "StudentId": 1,
+        "CourseId": 1
+    },
+    {
+        "StudentId": 1,
+        "CourseId": 6
+    },
+    {
+        "StudentId": 1,
+        "CourseId": 7
+    },
+    {
+        "StudentId": 7,
+        "CourseId": 1
+    },
+    {
+        "StudentId": 10,
+        "CourseId": 6
+    },
+    {
+        "StudentId": 10,
+        "CourseId": 9
+    },
+    {
+        "StudentId": 5,
+        "CourseId": 16
+    }
+]
