@@ -1,42 +1,42 @@
 [
     {
-        "categoryName": "challenge",
+        "name": "challenge",
         "subject": "Bahasa"
     },
     {
-        "categoryName": "local",
+        "name": "local",
         "subject": "IPA"
     },
     {
-        "categoryName": "portal",
+        "name": "portal",
         "subject": "Keterampilan"
     },
     {
-        "categoryName": "contingency",
+        "name": "contingency",
         "subject": "IPS"
     },
     {
-        "categoryName": "superstructure",
+        "name": "superstructure",
         "subject": "IPA"
     },
     {
-        "categoryName": "Profit-focused",
+        "name": "Profit-focused",
         "subject": "Bahasa"
     },
     {
-        "categoryName": "heuristic",
+        "name": "heuristic",
         "subject": "Keterampilan"
     },
     {
-        "categoryName": "pricing structure",
+        "name": "pricing structure",
         "subject": "Bahasa"
     },
     {
-        "categoryName": "initiative",
+        "name": "initiative",
         "subject": "Keterampilan"
     },
     {
-        "categoryName": "forecast",
+        "name": "forecast",
         "subject": "Keterampilan"
     }
 ]
