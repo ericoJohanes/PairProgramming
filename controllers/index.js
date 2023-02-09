@@ -85,16 +85,22 @@ class Controller {
         res.render('addForm')
     }
     static enrollCourse(req, res) {
-        let {id} = req.params;
-        let StudentId;
-        
-        Course.findByPk(+id)
-        .then(course => {
-            if(!course){
-                throw 'no course found'
-            }
-            return StudentCourse.create({StudentId, CourseId: +id})
-        })
+        let {CourseId} = req.params;
+        CourseId = +CourseId
+        let StudentId = req.session.userId;
+        if(req.session.userRole !== 'Student'){
+            let authNeed = 'Only student can enroll in course'
+            return res.redirect(`/courses/${CourseId}/courseDetail?error=${authNeed}`)
+        }        
+            Course.findByPk(CourseId)
+            .then(course => {
+                if(!course){
+                    throw 'no course found'
+                }
+                return StudentCourse.create({StudentId, CourseId})
+            })
+            .then(_ => res.redirect(`/courses`))
+            .catch(err => res.send(err))
     }
     static userDetail(req, res) {
         let {id} = req.params;

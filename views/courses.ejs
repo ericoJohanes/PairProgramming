@@ -23,7 +23,6 @@
             <th>Course Duration</th>
             <th>Course Description</th>
             <th>Students Count</th>
-            <th>Enroll Now</th>
         </tr>
         <% courses.forEach((el,index)=> { %>
             <tr>
@@ -46,11 +45,6 @@
                 </td>
                 <td>
                     <%= el.Users.length %>
-                </td>
-                <td>
-                    <a href="/courses/enroll/<%= el.id %>">
-                        <button>Enroll</button>
-                    </a>
                 </td>
             </tr>
             <% }) %>

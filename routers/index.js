@@ -1,4 +1,5 @@
 const Controller = require('../controllers')
+const user = require('../models/user')
 const router = require('express').Router()
 
 
@@ -23,9 +24,18 @@ router.get('/courses', Controller.courses)
 router.get('/courses/:id/courseDetail', Controller.courseDetail)
 //for students to enroll
 
-router.get('/courses/:CourseId/enroll/:StudentId', Controller.enrollCourse)
+
+router.get('/courses/:CourseId/enroll/', Controller.enrollCourse)
 
 //for teacher to create course
+router.get('/courses/add',(req,res,next) => {
+    if(req.session.userRole == 'Teacher'){
+        next()
+    }else{
+        let authNeed = 'only instructors can make course'
+        res.redirect(`/courses?error=${authNeed}`)
+    }
+})
 
     // router.get('/courses/add', Controller.addForm)
     // router.post('/courses/add', Controller.addCourse)
