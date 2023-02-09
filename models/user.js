@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
 
-    hashingPass() {
+    static hashingPass() {
       let salt = bcryptjs.genSaltSync(7);
       let passHashed = bcryptjs.hashSync(this.password, salt)
       return passHashed
@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.beforeCreate((user, opt) => {
-    user.password = user.hashingPass()
+    user.password = User.hashingPass()
   })
 
   return User;

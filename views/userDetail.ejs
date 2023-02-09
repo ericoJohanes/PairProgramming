@@ -12,39 +12,30 @@
 <body>
   <%-include ('partials/_loggedNavbar') %>
     <h1>User Details</h1>
-
     <table>
       <tbody>
         <div style="display: flex; flex-wrap: wrap;">
-          <%user.forEach(el=> { %>
-            <div style="width: 25%; display: inline-block;">
-              <td>
-                <div class="profilePicture">
-                  <img src="<%= el.profilePicture %>" alt="Profile Picture">
-                </div>
-                <p><b>Full Name:</b>
-                  <%= el.fullName %>
-                </p>
-                <p><b>School:</b>
-                  <%= el.school %>
-                </p>
-                <p><b>Date of Birth:</b>
-                  <%= el.dateOfBirth %>
-                </p>
-                <p><b>About:</b>
-                  <%= el.about %>
-                </p>
-                <% if (loggedInUser && loggedInUser.role==="teacher" ) { %>
-                  <button type="button" id="add-course" onclick="window.location.href='/courses/add'">Add
-                    Course</button>
-                  <% } %>
-                    <button type="button" id="edit"
-                      onclick="window.location.href='/users/edit/<%= el.UserId %>'">Edit</button>
-                    <button type="button" id="delete"
-                      onclick="window.location.href='/users/delete/<%= el.UserId %>' ">Delete</button>
-              </td>
-            </div>
-            <% }) %>
+          <div style="width: 25%; display: inline-block;">
+            <td>
+              <div class="profilePicture">
+                <img src="<%= user.profilePicture %>" alt="Profile Picture">
+              </div>
+              <p><b>Full Name:</b>
+                <%= user.fullName %>
+              </p>
+              <p><b>School:</b>
+                <%= user.school %>
+              </p>
+              <p><b>Date of Birth:</b>
+                <%= user.dateOfBirth %>
+              </p>
+              <p><b>About:</b>
+                <%= user.about %>
+              </p>
+              <button type="button" id="edit"
+                onclick="window.location.href='/users/edit/<%= user.UserId %>'">Edit</button>
+            </td>
+          </div>
         </div>
       </tbody>
 

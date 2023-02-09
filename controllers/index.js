@@ -25,7 +25,7 @@ class Controller {
                         if (validPass) {
                             req.session.userId = user.id;
                             req.session.userRole = user.role;
-                            res.redirect('/courses')
+                            res.redirect('/registerDetail')
                         } else {
                             let error = 'password wrong'
                             throw errorThrower(error)
@@ -90,11 +90,11 @@ class Controller {
             })
     }
     static courses(req, res) {
-        Course.findAll({
-            include: User
-        })
+        let UserId = req.session.userId
+
+        Course.findAll({ include: User })
             .then(courses => {
-                res.render('courses', { courses, hourFormatter })
+                res.render('courses', { courses, hourFormatter, UserId })
             })
             .catch(err => res.send(err))
     }
@@ -107,9 +107,7 @@ class Controller {
         })
             .then(data => {
                 course = data;
-                return User.findByPk(course.TeacherId, {
-                    include: UserDetail
-                })
+                return User.findByPk(course.TeacherId, { include: UserDetail })
             })
             .then(teacher => {
                 res.render('courseDetail', { teacher, course, hourFormatter })
@@ -162,14 +160,33 @@ class Controller {
     static userDetail(req, res) {
         let { id } = req.params;
 
-        User.findByPk(+id, { include: UserDetail })
+        UserDetail.findOne({
+            where: { UserId: +id }
+        })
             .then(user => {
                 res.render('userDetail', { user })
             })
+            .catch(err => res.send(err))
     }
     static logout(req, res) {
         req.session.destroy()
         res.redirect('/')
+    }
+    static deleteCourse(req, res) {
+        let { id } = req.params
+
+        StudentCourse.destroy({ where: { CourseId: id } })
+            .then(_ => {
+                return Course.findByPk(+id)
+            })
+            .then(_ => {
+                return Course.destroy({ where: { id } })
+            })
+            .then(_ => res.redirect('/courses'))
+            .catch(err => {
+                let errors = errorHandler(err)
+                errors ? res.redirect(`/courses/${id}/courseDetail?error=${errors}`) : res.send(err)
+            })
     }
 }
 
