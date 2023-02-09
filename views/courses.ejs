@@ -5,50 +5,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../input.css">
     <title>Document</title>
 </head>
 
 <body>
-    <h1>Courses</h1>
-    <a href="/courses/add">
-        <button>
-            Add Course
-        </button>
-    </a>
-    <table>
-        <tr>
-            <th>No.</th>
-            <th>Course Name</th>
-            <th>Course Level</th>
-            <th>Course Duration</th>
-            <th>Course Description</th>
-            <th>Students Count</th>
-        </tr>
-        <% courses.forEach((el,index)=> { %>
+    <%-include ('partials/_loggedNavbar') %>
+        <h1>Courses</h1>
+        <a href="/courses/add">
+            <button>
+                Add Course
+            </button>
+        </a>
+        <table>
             <tr>
-                <td>
-                    <%= ++index %>
-                </td>
-                <td>
-                    <a href="/courses/<%= el.id %>/courseDetail">
-                        <%= el.name %>
-                    </a>
-                </td>
-                <td>
-                    <%= el.level %>
-                </td>
-                <td>
-                    <%= el.duration %>
-                </td>
-                <td>
-                    <%= el.description %>
-                </td>
-                <td>
-                    <%= el.Users.length %>
-                </td>
+                <th>No.</th>
+                <th>Course Name</th>
+                <th>Course Level</th>
+                <th>Course Duration</th>
+                <th>Course Description</th>
+                <th>Students Count</th>
             </tr>
-            <% }) %>
-    </table>
+            <% courses.forEach((el,index)=> { %>
+                <tr>
+                    <td>
+                        <%= ++index %>
+                    </td>
+                    <td>
+                        <a href="/courses/<%= el.id %>/courseDetail">
+                            <%= el.name %>
+                        </a>
+                    </td>
+                    <td>
+                        <%= el.level %>
+                    </td>
+                    <td>
+                        <%= hourFormatter(el.duration) %>
+                    </td>
+                    <td>
+                        <%= el.description %>
+                    </td>
+                    <td>
+                        <%= el.Users.length %>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
 </body>
 
 </html>

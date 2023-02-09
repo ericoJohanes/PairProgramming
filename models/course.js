@@ -15,15 +15,46 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Course.init({
-    name: DataTypes.STRING,
-    level: DataTypes.STRING,
-    duration: DataTypes.INTEGER,
-    description: DataTypes.TEXT,
-    TeacherId: {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: true,
+        notNull: true,
+      }
+    },
+    level: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        notNull: true,
+      }
+    },
+    duration: {
       type: DataTypes.INTEGER,
-      references: {
-        model: 'User',
-        key: 'id'
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        notNull: true,
+        isNumeric: true
+      }
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        notNull: true,
+      }
+    },
+    TeacherId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      validate: {
+        notNull: true,
+        notEmpty: true,
       }
     }
   }, {

@@ -1,12 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Detail</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../input.css">
+  <title>User</title>
 </head>
+
 <body>
-    <h1><%= user.UserDetails[0].name %></h1>
+  <%-include ('partials/_loggedNavbar') %>
+    <h1>User Details</h1>
+
+    <table>
+      <tbody>
+        <div style="display: flex; flex-wrap: wrap;">
+          <%user.forEach(el=> { %>
+            <div style="width: 25%; display: inline-block;">
+              <td>
+                <div class="profilePicture">
+                  <img src="<%= el.profilePicture %>" alt="Profile Picture">
+                </div>
+                <p><b>Full Name:</b>
+                  <%= el.fullName %>
+                </p>
+                <p><b>School:</b>
+                  <%= el.school %>
+                </p>
+                <p><b>Date of Birth:</b>
+                  <%= el.dateOfBirth %>
+                </p>
+                <p><b>About:</b>
+                  <%= el.about %>
+                </p>
+                <% if (loggedInUser && loggedInUser.role==="teacher" ) { %>
+                  <button type="button" id="add-course" onclick="window.location.href='/courses/add'">Add
+                    Course</button>
+                  <% } %>
+                    <button type="button" id="edit"
+                      onclick="window.location.href='/users/edit/<%= el.UserId %>'">Edit</button>
+                    <button type="button" id="delete"
+                      onclick="window.location.href='/users/delete/<%= el.UserId %>' ">Delete</button>
+              </td>
+            </div>
+            <% }) %>
+        </div>
+      </tbody>
+
+    </table>
 </body>
+
 </html>
