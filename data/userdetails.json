@@ -1,0 +1,82 @@
+[
+    {
+        "fullName": "Tressa Bugbee",
+        "profilePicture": "http://dummyimage.com/156x235.png/ff4444/ffffff",
+        "school": "Lake View",
+        "dateOfBirth": "2004-08-31",
+        "about": "In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.",
+        "UserId": 3
+    },
+    {
+        "fullName": "Brita Mosedale",
+        "profilePicture": "http://dummyimage.com/203x218.png/dddddd/000000",
+        "school": "Portage",
+        "dateOfBirth": "1999-06-20",
+        "about": "Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.",
+        "UserId": 2
+    },
+    {
+        "fullName": "Leeann Kimbury",
+        "profilePicture": "http://dummyimage.com/148x165.png/dddddd/000000",
+        "school": "Fair Oaks",
+        "dateOfBirth": "1997-12-26",
+        "about": "Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.",
+        "UserId": 2
+    },
+    {
+        "fullName": "Perle Vint",
+        "profilePicture": "http://dummyimage.com/249x138.png/cc0000/ffffff",
+        "school": "Oxford",
+        "dateOfBirth": "2003-04-05",
+        "about": "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
+        "UserId": 5
+    },
+    {
+        "fullName": "Conney Lindl",
+        "profilePicture": "http://dummyimage.com/230x250.png/5fa2dd/ffffff",
+        "school": "Ronald Regan",
+        "dateOfBirth": "2000-09-04",
+        "about": "Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.",
+        "UserId": 6
+    },
+    {
+        "fullName": "Carolyn MacDonnell",
+        "profilePicture": "http://dummyimage.com/109x105.png/cc0000/ffffff",
+        "school": "Little Fleur",
+        "dateOfBirth": "2001-11-24",
+        "about": "Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.",
+        "UserId": 6
+    },
+    {
+        "fullName": "Katti Stillman",
+        "profilePicture": "http://dummyimage.com/139x141.png/5fa2dd/ffffff",
+        "school": "Mosinee",
+        "dateOfBirth": "1997-06-14",
+        "about": "Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.",
+        "UserId": 6
+    },
+    {
+        "fullName": "Sandye Ronan",
+        "profilePicture": "http://dummyimage.com/173x123.png/5fa2dd/ffffff",
+        "school": "Green Ridge",
+        "dateOfBirth": "1993-10-17",
+        "about": "In congue. Etiam justo. Etiam pretium iaculis justo.",
+        "UserId": 2
+    },
+    {
+        "fullName": "Anneliese Beneteau",
+        "profilePicture": "http://dummyimage.com/195x129.png/cc0000/ffffff",
+        "school": "Ridgeway",
+        "dateOfBirth": "1990-10-27",
+        "about": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.",
+        "UserId": 6
+    },
+    {
+        "fullName": "Philis Mc Caughan",
+        "profilePicture": "http://dummyimage.com/111x129.png/5fa2dd/ffffff",
+        "school": "Shasta",
+        "dateOfBirth": "2004-05-04",
+        "about": "Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.",
+        "UserId": 7
+    }
+]
