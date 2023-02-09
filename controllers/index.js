@@ -6,8 +6,17 @@ class Controller {
     static login(req, res) {
 
     }
+    static registerForm(req, res) {
+        res.render('registerForm')
+    }
     static register(req, res) {
+        let { email, password, role } = req.body
 
+        User.create({ email, password, role })
+            .then(_ => {
+                res.redirect('/courses')
+            })
+            .catch(err => res.send(err))
     }
     static courses(req, res) {
         Course.findAll({ include: User })
