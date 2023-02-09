@@ -18,15 +18,11 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     static dateConvert(date) {
-      date = new Date(date)
-      let year = date.getFullYear()
-      let month = date.getMonth() + 1
-      let day = date.getDate()
-      date = date.toUTCString()
-
-      month = `${month}`.length < 2 ? `0${month}` : month
-      day = `${day}`.length < 2 ? `0${day}` : day
-
+      // let year = date.getFullYear()
+      // let month = date.getMonth() + 1
+      // let day = date.getDate()
+      date = JSON.stringify(date).split('T')[0].slice(1)
+      console.log(date);
       return date
     }
 

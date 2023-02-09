@@ -3,7 +3,6 @@ const bcryptjs = require('bcryptjs')
 const { errorHandler, errorThrower, hourFormatter } = require('../helpers')
 const { Op } = require('sequelize')
 
-
 class Controller {
     static home(req, res) {
         res.render('homepage')
@@ -183,7 +182,8 @@ class Controller {
             where: { UserId: +id }
         })
             .then(user => {
-                res.render('userDetail', { user, error })
+                const dateConverter = UserDetail.dateConvert
+                res.render('userDetail', { user, error, dateConverter })
             })
             .catch(err => res.send(err))
     }
@@ -196,9 +196,9 @@ class Controller {
             where: { UserId: id }
         })
             .then(userDetail => {
-                userDetail.dateOfBirth = UserDetail.dateConvert(userDetail.dateOfBirth)
-                console.log(userDetail.dateOfBirth);
-                res.render('editForm', { userDetail, error })
+                const dateConverter = UserDetail.dateConvert
+
+                res.render('editForm', { userDetail, error, dateConverter })
             })
 
     }
