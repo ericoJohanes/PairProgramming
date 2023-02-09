@@ -1,10 +1,29 @@
 const { Course, User, UserDetail } = require('../models')
+const bcryptjs = require('bcryptjs')
+
 class Controller {
     static home(req, res) {
-
+        res.render('homepage')
+    }
+    static loginForm(req, res) {
+        res.render('loginForm')
     }
     static login(req, res) {
+        let { email, password } = req.body
 
+        User.findOne({ where: { email } })
+            .then(user => {
+                if (user) {
+                    const validPass = bcryptjs.compareSync(password, user.password)
+                    if (validPass) {
+                        res.redirect('/courses')
+                    }
+                } else {
+                    let cantFind = 'No User Has Found'
+                    res.redirect(`/login?error=${cantFind}`)
+                }
+            })
+            .catch(err => res.send(err))
     }
     static registerForm(req, res) {
         res.render('registerForm')
