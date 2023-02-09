@@ -1,5 +1,5 @@
 const errorHandler = (error) => {
-    if ((error.name.match(/(validation)/gi))) {
+    if (error.name.match(/(validation)/gi)) {
         errors = error.errors.map(el => el.message)
         return errors
     }

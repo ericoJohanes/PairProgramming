@@ -1,6 +1,9 @@
 const { Course, User, UserDetail, StudentCourse } = require('../models')
 const bcryptjs = require('bcryptjs')
 const { errorHandler, errorThrower, hourFormatter } = require('../helpers')
+const { Op } = require('sequelize')
+
+
 class Controller {
     static home(req, res) {
         res.render('homepage')
@@ -125,7 +128,11 @@ class Controller {
     static addCourse(req, res) {
         let { name, level, duration, description } = req.body;
         let id = req.session.userId;
+        let role = req.session.userRole;
 
+        if (role !== 'Teacher') {
+            throw errorThrower('Only Teacher Can Create Course!')
+        }
         Course.create({ name, level, duration, description, 'TeacherId': +id })
             .then(_ => res.redirect('/courses'))
             .catch(err => {
@@ -174,7 +181,11 @@ class Controller {
     }
     static deleteCourse(req, res) {
         let { id } = req.params
+        let role = req.session.userRole
 
+        if (role != 'Teacher') {
+            throw errorThrower('Only Teacher can delete Course')
+        }
         StudentCourse.destroy({ where: { CourseId: id } })
             .then(_ => {
                 return Course.findByPk(+id)
