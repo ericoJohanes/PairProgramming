@@ -11,7 +11,6 @@ class Controller {
     static login(req, res) {
         let { email, password } = req.body
 
-
         if (!email || !password) {
             let error = 'all field must be filled'
             res.redirect(`/login?error=${error}`)
@@ -44,15 +43,20 @@ class Controller {
             .catch(err => res.send(err))
     }
     static courses(req, res) {
-        Course.findAll({ include: User })
+        Course.findAll({
+            include: User,
+        })
             .then(courses => {
-                res.send(courses)
+                res.render('courses', { courses })
             })
             .catch(err => res.send(err))
     }
+    static courseDetail(req, res) {
+
+        Course.findByPk()
+    }
     static addForm(req, res) {
-
-
+        res.render('addForm')
     }
     static addCourse(req, res) {
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add new course</title>
+</head>
+
+<body>
+    <h1>New Course</h1>
+
+    <form action="/courses/add" method="post">
+        <input type="text" name="name" placeholder="name">
+        <br>
+        <select name="level">
+            <option disabled selected value>-- select level --</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+        </select>
+        <br>
+        <input type="number" name="duration" placeholder="duration">
+        <br>
+        <textarea name="description" cols="10" rows="3"></textarea>
+        <br>
+        <button type="submit">Add new Course</button>
+    </form>
+</body>
+
+</html>

@@ -15,8 +15,8 @@ router.get('/courses', Controller.courses)
 
 //for students to enroll
 
-router.get('/courses/enroll', Controller.enrollForm)
-router.post('/courses/enroll', Controller.enrollCourse)
+router.get('/courses/enroll/:id', Controller.enrollForm)
+router.post('/courses/enroll/:id', Controller.enrollCourse)
 
 //for teacher to create course
 
