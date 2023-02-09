@@ -11,19 +11,25 @@ class Controller {
     static login(req, res) {
         let { email, password } = req.body
 
-        User.findOne({ where: { email } })
-            .then(user => {
-                if (user) {
-                    const validPass = bcryptjs.compareSync(password, user.password)
-                    if (validPass) {
-                        res.redirect('/courses')
+
+        if (!email || !password) {
+            let error = 'all field must be filled'
+            res.redirect(`/login?error=${error}`)
+        } else {
+            User.findOne({ where: { email } })
+                .then(user => {
+                    if (user) {
+                        const validPass = bcryptjs.compareSync(password, user.password)
+                        if (validPass) {
+                            res.redirect('/courses')
+                        }
+                    } else {
+                        let cantFind = 'No User Has Found'
+                        res.redirect(`/login?error=${cantFind}`)
                     }
-                } else {
-                    let cantFind = 'No User Has Found'
-                    res.redirect(`/login?error=${cantFind}`)
-                }
-            })
-            .catch(err => res.send(err))
+                })
+                .catch(err => res.send(err))
+        }
     }
     static registerForm(req, res) {
         res.render('registerForm')
