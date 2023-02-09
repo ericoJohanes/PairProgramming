@@ -3,7 +3,6 @@ const bcryptjs = require('bcryptjs')
 const { errorHandler, errorThrower, hourFormatter } = require('../helpers')
 const { Op } = require('sequelize')
 
-
 class Controller {
     static home(req, res) {
         res.render('homepage')
