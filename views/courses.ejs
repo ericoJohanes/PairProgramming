@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Courses</h1>
+    <a href="/courses/add">
+        <button>
+            Add Course
+        </button>
+    </a>
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>Course Name</th>
+            <th>Course Level</th>
+            <th>Course Duration</th>
+            <th>Course Description</th>
+            <th>Students Count</th>
+            <th>Enroll Now</th>
+        </tr>
+        <% courses.forEach((el,index)=> { %>
+            <tr>
+                <td>
+                    <%= ++index %>
+                </td>
+                <td>
+                    <a href="/courses/<%= el.id %>/courseDetail">
+                        <%= el.name %>
+                    </a>
+                </td>
+                <td>
+                    <%= el.level %>
+                </td>
+                <td>
+                    <%= el.duration %>
+                </td>
+                <td>
+                    <%= el.description %>
+                </td>
+                <td>
+                    <%= el.Users.length %>
+                </td>
+                <td>
+                    <a href="/courses/enroll/<%= el.id %>">
+                        <button>Enroll</button>
+                    </a>
+                </td>
+            </tr>
+            <% }) %>
+    </table>
+</body>
+
+</html>

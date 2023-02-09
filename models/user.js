@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-
       User.hasOne(models.UserDetail)
       User.belongsToMany(models.Course, { through: models.StudentCourse, foreignKey: 'StudentId' })
 

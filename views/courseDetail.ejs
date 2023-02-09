@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Detail</title>
+</head>
+<body>
+    <h1><%= course.name %></h1>
+    <a href="/courses//enroll/<%= course.id %>">
+    <button>Enroll Now!</button>
+    </a>
+    <h2><%= teacher.UserDetail.fullName %></h2>
+    <h4><%= course.level %></h4>
+    <h5><%= course.duration %> minutes</h5>
+    <p><%= course.description %></p>
+</body>
+</html>
