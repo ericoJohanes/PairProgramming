@@ -55,7 +55,6 @@ class Controller {
     static registerForm(req, res) {
         res.render('registerForm')
     }
-
     static register(req, res) {
         let { email, password, role } = req.body
 
@@ -70,11 +69,12 @@ class Controller {
     }
     static userDetailForm(req, res) {
         let UserId = req.session.userId;
+        let { error } = req.query;
 
         UserDetail.findOne({ where: { UserId } })
             .then(userDetail => {
                 if (!userDetail) {
-                    res.render('detailForm')
+                    res.render('detailForm', { error })
                 } else {
                     res.redirect('/courses')
                 }
@@ -94,10 +94,16 @@ class Controller {
     }
     static courses(req, res) {
         let UserId = req.session.userId
+        let { filter, error } = req.query
+        error = error || null
+        let query = { include: User }
+        filter ? query.where = {
+            name: { [Op.iLike]: `%${filter}%` }
+        } : null
 
-        Course.findAll({ include: User })
+        Course.findAll(query)
             .then(courses => {
-                res.render('courses', { courses, hourFormatter, UserId })
+                res.render('courses', { courses, hourFormatter, UserId, error })
             })
             .catch(err => res.send(err))
     }
@@ -121,7 +127,7 @@ class Controller {
     }
     static addForm(req, res) {
         let { error } = req.query;
-        error = error || {}
+        error = error || null
 
         res.render('addForm', { error })
     }

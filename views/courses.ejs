@@ -11,6 +11,11 @@
 
 <body>
     <%-include ('partials/_loggedNavbar') %>
+        <div class="errors">
+            <% if (error) { %>
+                <%-include ('partials/_errors') %>
+                    <% } %>
+        </div>
         <div class="title">
             <h1>Courses</h1>
             <a href="/courses/add">
@@ -21,6 +26,12 @@
             <a href="/user/<%= UserId %>/details">
                 <button>Check Profile</button>
             </a>
+        </div>
+        <div class="searchBar">
+            <form action="/courses?" method="get">
+                <input type="text" name="filter">
+                <button type="submit">Filter by Name</button>
+            </form>
         </div>
 
         <table>

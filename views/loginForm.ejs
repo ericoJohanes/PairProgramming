@@ -9,11 +9,9 @@
 <body>
     <%-include ('partials/_navbar') %>
         <div class="errors">
-            <% errors.forEach(el=> { %>
-                <p>
-                    <%= el %>
-                </p>
-                <% }) %>
+            <% if (error) { %>
+                <%-include ('partials/_errors') %>
+                    <% } %>
         </div>
         <div class="container">
 

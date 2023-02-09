@@ -11,6 +11,11 @@
 
 <body>
     <%-include ('partials/_navbar') %>
+        <div class="errors">
+            <% if (errors) { %>
+                <%-include ('partials/_errors') %>
+                    <% } %>
+        </div>
         <div class="formContainer">
             <form action="/registerDetail" method="post">
                 <label for="">Full Name</label>

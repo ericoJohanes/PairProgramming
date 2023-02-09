@@ -49,3 +49,8 @@ input[type=url] {
   border: 2px solid #ccc;
   border-radius: 4px;
 }
+
+.errors {
+  color: red;
+  font-weight: 700;
+}
