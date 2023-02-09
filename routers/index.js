@@ -15,4 +15,5 @@ router.get('/courses/enroll', Controller.enrollForm)
 router.post('/courses/enroll', Controller.enrollCourse)
 router.get('/courses/:id/details', Controller.userDetail)
 
+
 module.exports = router
