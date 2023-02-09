@@ -5,14 +5,15 @@ const router = require('express').Router()
 router.get('/', Controller.home)
 router.get('/login', Controller.loginForm)
 router.post('/login', Controller.login)
+router.get('/logout', Controller.logout)
 router.get('/register', Controller.registerForm)
 router.post('/register', Controller.register)
 
 //for login to see course
 router.use(Controller.auth)
 
-router.get('/userDetail', Controller.userDetailForm)
-router.post('/userDetail', Controller.addUserDetail)
+router.get('/registerDetail', Controller.userDetailForm)
+router.post('/registerDetail', Controller.addUserDetail)
 router.get('/courses', Controller.courses)
 router.get('/courses/:id/courseDetail', Controller.courseDetail)
 router.get('/courses/:CourseId/enroll/', Controller.enrollCourse)
@@ -27,7 +28,7 @@ router.get('/courses/add', (req, res, next) => {
 
 router.get('/courses/add', Controller.addForm)
 router.post('/courses/add', Controller.addCourse)
-// router.get('/courses/:id/details', Controller.userDetail)
+router.get('/courses/:id/details', Controller.userDetail)
 
 
 module.exports = router

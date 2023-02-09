@@ -25,7 +25,7 @@ class Controller {
                         if (validPass) {
                             req.session.userId = user.id;
                             req.session.userRole = user.role;
-                            res.redirect('/userDetail')
+                            res.redirect('/courses')
                         } else {
                             let error = 'password wrong'
                             throw errorThrower(error)
@@ -142,7 +142,7 @@ class Controller {
 
         if (req.session.userRole !== 'Student') {
             let authNeed = 'Only student can enroll in course'
-            return res.redirect(`/courses/${CourseId}/courseDetail?error=${authNeed}`)
+            throw errorHandler(authNeed)
         } else {
             Course.findByPk(CourseId)
                 .then(course => {
@@ -166,7 +166,10 @@ class Controller {
             .then(user => {
                 res.render('userDetail', { user })
             })
-
+    }
+    static logout(req, res) {
+        req.session.destroy()
+        res.redirect('/')
     }
 }
 
