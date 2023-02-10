@@ -8,17 +8,17 @@ class Controller {
         res.render('homepage')
     }
     static loginForm(req, res) {
-        let { error } = req.query
-        error = error || null
+        let { errors } = req.query
+        errors = errors || null
 
-        res.render('loginForm', { error })
+        res.render('loginForm', { errors })
     }
     static login(req, res) {
         let { email, password } = req.body
 
         if (!email || !password) {
-            let error = 'all field must be filled'
-            throw errorThrower(error)
+            let errors = 'all field must be filled'
+            throw errorThrower(errors)
         } else {
             User.findOne({ where: { email } })
                 .then(user => {
@@ -29,8 +29,8 @@ class Controller {
                             req.session.userRole = user.role;
                             res.redirect('/registerDetail')
                         } else {
-                            let error = 'password wrong'
-                            throw errorThrower(error)
+                            let errors = 'password wrong'
+                            throw errorThrower(errors)
                         }
                     } else {
                         let cantFind = 'No User Has Found'
@@ -39,7 +39,11 @@ class Controller {
                 })
                 .catch(err => {
                     let errors = errorHandler(err)
-                    errors ? res.redirect(`/login?error=${errors}`) : res.send(err)
+                    if (errors) {
+                        res.redirect(`/login?errors=${errors}`)
+                    } else {
+                        res.send(err)
+                    }
                 })
         }
     }
@@ -48,7 +52,7 @@ class Controller {
             next()
         } else {
             let authNeed = `you haven't login yet!`
-            res.redirect(`/login?error=${authNeed}`)
+            res.redirect(`/login?errors=${authNeed}`)
         }
     }
     static registerForm(req, res) {
@@ -63,18 +67,22 @@ class Controller {
             })
             .catch(err => {
                 let errors = errorHandler(err)
-                errors ? res.redirect(`/register?error=${errors}`) : res.send(err)
+                if (errors) {
+                    res.redirect(`/register?errors="${errors}"`)
+                } else {
+                    res.send(err)
+                }
             })
     }
     static userDetailForm(req, res) {
         let UserId = req.session.userId;
-        let { error } = req.query
-        error = error || null
+        let { errors } = req.query
+        errors = errors || null
 
         UserDetail.findOne({ where: { UserId } })
             .then(userDetail => {
                 if (!userDetail) {
-                    res.render('detailForm', { error })
+                    res.render('detailForm', { errors })
                 } else {
                     res.redirect('/courses')
                 }
@@ -89,13 +97,17 @@ class Controller {
             .then(_ => res.redirect('/courses'))
             .catch(err => {
                 let errors = errorHandler(err)
-                errors ? res.redirect(`/userDetail?error=${errors}`) : res.send(err)
+                if (errors) {
+                    res.redirect(`/registerDetail?errors="${errors}"`)
+                } else {
+                    res.send(err)
+                }
             })
     }
     static courses(req, res) {
         let UserId = req.session.userId
-        let { filter, error } = req.query
-        error = error || null
+        let { filter, errors } = req.query
+        errors = errors || null
         let query = { include: User }
         filter ? query.where = {
             name: { [Op.iLike]: `%${filter}%` }
@@ -103,15 +115,15 @@ class Controller {
 
         Course.findAll(query)
             .then(courses => {
-                res.render('courses', { courses, hourFormatter, UserId, error })
+                res.render('courses', { courses, hourFormatter, UserId, errors })
             })
             .catch(err => res.send(err))
     }
     static courseDetail(req, res) {
         let { id } = req.params;
         let course;
-        let { error } = req.query
-        error = error || null
+        let { errors } = req.query
+        errors = errors || null
 
 
         Course.findByPk(+id, {
@@ -122,17 +134,17 @@ class Controller {
                 return User.findByPk(course.TeacherId, { include: UserDetail })
             })
             .then(teacher => {
-                res.render('courseDetail', { teacher, course, hourFormatter, error })
+                res.render('courseDetail', { teacher, course, hourFormatter, errors })
             })
             .catch(err => {
                 res.send(err)
             })
     }
     static addForm(req, res) {
-        let { error } = req.query;
-        error = error || null
+        let { errors } = req.query;
+        errors = errors || null
 
-        res.render('addForm', { error })
+        res.render('addForm', { errors })
     }
     static addCourse(req, res) {
         let { name, level, duration, description } = req.body;
@@ -140,57 +152,69 @@ class Controller {
         let role = req.session.userRole;
 
         if (role !== 'Teacher') {
-            throw errorThrower('Only Teacher Can Create Course!')
+            let errors = errorThrower('Only Teacher Can Create Course!')
+            throw errors
+            // return res.redirect(`/courses?errors=${errors}`)
         }
         Course.create({ name, level, duration, description, 'TeacherId': +id })
             .then(_ => res.redirect('/courses'))
             .catch(err => {
-                let errors = errorHandler(err)
-                errors ? res.redirect(`/courses/add?error=${errors}`) : res.send(err)
+                let errors = errorThrower(err)
+                if (errors) {
+                    res.redirect(`/courses?errors=${errors}`)
+                } else {
+                    res.send(err)
+                }
             })
     }
     static enrollCourse(req, res) {
-        let { CourseId } = req.params;
-        CourseId = +CourseId
+        let { id } = req.params;
         let StudentId = req.session.userId;
+        let CourseId = id
 
         if (req.session.userRole !== 'Student') {
-            let authNeed = 'Only student can enroll in course'
-            throw errorHandler(authNeed)
+            let errors = 'Only student can enroll in course'
+            res.redirect(`/courses/${CourseId}/courseDetail?errors=${errors}`)
         } else {
-            Course.findByPk(CourseId)
+            Course.findByPk(+id)
                 .then(course => {
                     if (!course) {
-                        let errorMsg = 'Course not Found'
-                        throw errorHandler(errorMsg)
+                        let errorsMsg = 'Course not Found'
+                        let errors = errorThrower(errorsMsg)
+                        res.redirect(`/courses/${CourseId}/courseDetail?errors=${errors}`)
+                    } else {
+                        return StudentCourse.create({ StudentId, CourseId })
                     }
-                    return StudentCourse.create({ StudentId, CourseId })
                 })
-                .then(_ => res.redirect(`/courses`))
+                .then(_ => res.redirect(`/ courses`))
                 .catch(err => {
                     let errors = errorHandler(err)
-                    errors ? res.redirect(`/courses/${CourseId}/courseDetail?error=${errors}`) : res.send(err)
+                    if (errors) {
+                        res.redirect(`/courses/${CourseId}/courseDetail?errors=${errors}`)
+                    } else {
+                        res.send(err)
+                    }
                 })
         }
     }
     static userDetail(req, res) {
         let { id } = req.params;
-        let { error } = req.query;
-        error = error || null
+        let { errors } = req.query;
+        errors = errors || null
 
         UserDetail.findOne({
             where: { UserId: +id }
         })
             .then(user => {
                 const dateConverter = UserDetail.dateConvert
-                res.render('userDetail', { user, error, dateConverter })
+                res.render('userDetail', { user, errors, dateConverter })
             })
             .catch(err => res.send(err))
     }
     static editForm(req, res) {
         let id = req.session.userId
-        let { error } = req.query;
-        error = error || null
+        let { errors } = req.query;
+        errors = errors || null
 
         UserDetail.findOne({
             where: { UserId: id }
@@ -198,9 +222,8 @@ class Controller {
             .then(userDetail => {
                 const dateConverter = UserDetail.dateConvert
 
-                res.render('editForm', { userDetail, error, dateConverter })
+                res.render('editForm', { userDetail, errors, dateConverter })
             })
-
     }
     static editDetail(req, res) {
         let { fullName, profilePicture, school, dateOfBirth, about } = req.body;
@@ -210,7 +233,11 @@ class Controller {
             .then(_ => res.redirect(`/user/${id}/details`))
             .catch(err => {
                 let errors = errorHandler(err)
-                errors ? res.redirect(`/user/${id}/edit?error=${errors}`) : res.send(err)
+                if (errors) {
+                    res.redirect(`/user/${id}/edit?errors=${errors}`)
+                } else {
+                    res.send(err)
+                }
             })
     }
     static logout(req, res) {
@@ -222,7 +249,8 @@ class Controller {
         let role = req.session.userRole
 
         if (role != 'Teacher') {
-            throw errorThrower('Only Teacher can delete Course')
+            let errors = 'Only Teacher can delete Course'
+            return res.redirect(`/courses/${id}/courseDetail?errors=${errors}`)
         }
         StudentCourse.destroy({ where: { CourseId: id } })
             .then(_ => {
@@ -234,7 +262,11 @@ class Controller {
             .then(_ => res.redirect('/courses'))
             .catch(err => {
                 let errors = errorHandler(err)
-                errors ? res.redirect(`/courses/${id}/courseDetail?error=${errors}`) : res.send(err)
+                if (errors) {
+                    return res.redirect(`/courses/${id}/courseDetail?errors=${errors}`)
+                } else {
+                    res.send(err)
+                }
             })
     }
 }
